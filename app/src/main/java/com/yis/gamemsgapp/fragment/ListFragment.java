@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yis.gamemsgapp.R;
 
 import java.util.ArrayList;
@@ -22,26 +24,96 @@ import java.util.List;
 public class ListFragment extends Fragment {
 
     private List<String> mList = new ArrayList();
-    private ListView mListView;
+    private PullToRefreshListView mListView;
+    private View mFootView;
     private MyAdapter mAdapter;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        addData();
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
         View root = inflater.inflate(R.layout.frag_list,null);
-        mListView = (ListView) root.findViewById(R.id.lv_list);
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
+        mListView = (PullToRefreshListView) root.findViewById(R.id.lv_list);
+
+
         mAdapter = new MyAdapter(getContext(),mList);
         mListView.setAdapter(mAdapter);
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                loadData();
+                if (null != refreshView) {
+                    refreshView.onRefreshComplete();
+                }
+            }
+        });
 
+        mListView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
+            @Override
+            public void onLastItemVisible() {
+                loadData();
+            }
+        });
+
+        mFootView = inflater.inflate(R.layout.footview_loading,null);
+
+        addFootView(mListView,mFootView);
 
         return root;
+    }
+
+    private void loadData(){
+        addData();
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void addData(){
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+        mList.add("hahah");
+    }
+
+    private void addFootView(PullToRefreshListView plv, View footView) {
+        ListView lv = plv.getRefreshableView();
+        if(lv.getFooterViewsCount() == 1) {
+            lv.addFooterView(footView);
+        }
+    }
+
+    private void removeFootView(PullToRefreshListView plv, View footView) {
+        ListView lv = plv.getRefreshableView();
+        if(lv.getFooterViewsCount() > 1) {
+            lv.removeFooterView(footView);
+        }
     }
 
 

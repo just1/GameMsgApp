@@ -30,3 +30,14 @@ proguard/
 
 # Android Studio captures folder
 captures/
+
+
+.idea/
+GameMsgApp.iml
+gradlew
+gradlew.bat
+pulltorefresh/pulltorefresh.iml
+
+gradle/
+app/app.iml
+meMsgApp.iml
