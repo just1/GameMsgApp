@@ -1,5 +1,6 @@
 package com.yis.gamemsgapp;
 
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.Window;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.yis.gamemsgapp.fragment.ListFragment;
@@ -24,10 +27,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         initView();
+        initSlidingMenu();
 
+    }
 
+    private void initSlidingMenu(){
         // configure the SlidingMenu
         SlidingMenu menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT);
@@ -48,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         //为侧滑菜单设置布局
         menu.setMenu(R.layout.leftmenu);
-    }
 
+    }
 
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.vp_main);
@@ -63,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mAdapter);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
 
     class MyAdapter extends FragmentPagerAdapter {
 

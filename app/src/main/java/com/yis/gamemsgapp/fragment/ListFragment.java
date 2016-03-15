@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yis.gamemsgapp.R;
+import com.yis.gamemsgapp.utils.TitleBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,10 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.frag_list,null);
+
+        new TitleBuilder(root).setTitleText("首页");
+
         mListView = (PullToRefreshListView) root.findViewById(R.id.lv_list);
-
-
         mAdapter = new MyAdapter(getContext(),mList);
         mListView.setAdapter(mAdapter);
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
