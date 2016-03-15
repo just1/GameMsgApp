@@ -40,4 +40,13 @@ pulltorefresh/pulltorefresh.iml
 
 gradle/
 app/app.iml
-meMsgApp.iml
+
+
+slidelibrary/build/
+slidelibrary/slidelibrary.iml
+
+
+
+
+
+

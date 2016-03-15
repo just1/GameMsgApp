@@ -50,7 +50,13 @@ public class ListFragment extends Fragment {
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 loadData();
                 if (null != refreshView) {
-                    refreshView.onRefreshComplete();
+                    mListView.postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            mListView.onRefreshComplete();
+                        }
+                    }, 1000);
                 }
             }
         });
