@@ -14,17 +14,21 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yis.gamemsgapp.R;
+import com.yis.gamemsgapp.bean.NewsSummary;
+import com.yis.gamemsgapp.model.loader.BModLoader;
 import com.yis.gamemsgapp.utils.TitleBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by yinjianhua on 16/3/14.
  */
 public class ListFragment extends Fragment {
 
-    private List<String> mList = new ArrayList();
+    private List<NewsSummary> mList = new ArrayList();
     private PullToRefreshListView mListView;
     private View mFootView;
     private MyAdapter mAdapter;
@@ -34,7 +38,7 @@ public class ListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addData();
+        loadData();
     }
 
     @Nullable
@@ -51,15 +55,6 @@ public class ListFragment extends Fragment {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 loadData();
-                if (null != refreshView) {
-                    mListView.postDelayed(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            mListView.onRefreshComplete();
-                        }
-                    }, 1000);
-                }
             }
         });
 
@@ -72,43 +67,34 @@ public class ListFragment extends Fragment {
 
         mFootView = inflater.inflate(R.layout.footview_loading,null);
 
-        addFootView(mListView,mFootView);
+        addFootView(mListView, mFootView);
 
         return root;
     }
 
     private void loadData(){
-        addData();
-        mAdapter.notifyDataSetChanged();
+
+        BModLoader.getInstance().load(getActivity().getApplicationContext(), new FindListener<NewsSummary>() {
+            @Override
+            public void onSuccess(List<NewsSummary> list) {
+                if ((null != mListView)&&(null != list)) {
+
+                    mList.addAll(list);
+                    mListView.onRefreshComplete();
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+
+
+
     }
 
-    private void addData(){
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-        mList.add("hahah");
-    }
 
     private void addFootView(PullToRefreshListView plv, View footView) {
         ListView lv = plv.getRefreshableView();
@@ -127,10 +113,10 @@ public class ListFragment extends Fragment {
 
     class MyAdapter extends BaseAdapter{
 
-        private List<String> mList;
+        private List<NewsSummary> mList;
         private LayoutInflater mInflater;
 
-        public MyAdapter(Context context,List<String> list){
+        public MyAdapter(Context context,List<NewsSummary> list){
             mList = list;
             mInflater =  LayoutInflater.from(context);
         }
@@ -167,7 +153,7 @@ public class ListFragment extends Fragment {
                 holder = (ViewHolder) view.getTag();
             }
 
-            holder.textView.setText(mList.get(i));
+            holder.textView.setText(mList.get(i).getTitle());
 
             return view;
         }

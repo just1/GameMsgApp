@@ -5,13 +5,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <span style="font-size: 16px;">  <!-- Activity全屏 开始-->
+    <!--<span style="font-size: 16px;">  &lt;!&ndash; Activity全屏 开始&ndash;&gt;-->
         <style name="MyFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
             <item name="android:windowNoTitle">true</item>
             <item name="android:windowFullscreen">true</item>
             <item name="android:windowActionBar">false</item>
         </style>
         <!-- Activity全屏 结束-->
-    </span>
+    <!--</span>-->
 
 </resources>

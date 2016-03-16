@@ -7,16 +7,25 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Window;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.yis.gamemsgapp.bean.NewsSummary;
+import com.yis.gamemsgapp.bean.Person;
 import com.yis.gamemsgapp.fragment.ListFragment;
+import com.yis.gamemsgapp.model.loader.BModLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.GetListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,15 +33,23 @@ public class MainActivity extends AppCompatActivity {
     private MyAdapter mAdapter;
     private List mList;
 
+    private final static String TAG = "MainActivity";
+    private final static String BMOD_KEY = "1fa08f8d5754e18b8db11f4afab235aa";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
+        // 初始化 Bmob SDK
+        Bmob.initialize(this, BMOD_KEY);
+
+//        testAddData();
+
         initView();
         initSlidingMenu();
-
     }
 
     private void initSlidingMenu(){
@@ -70,6 +87,21 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(getSupportFragmentManager(),mList);
         mViewPager.setAdapter(mAdapter);
     }
+
+    private void testAddData(){
+        for(int i=1;i<200;i++) {
+            NewsSummary bean =new NewsSummary("标题"+i,
+                    "描述"+i,
+                    String.valueOf(i),
+                    "lh");
+
+            BModLoader.getInstance().add(this, bean);
+
+        }
+    }
+
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
