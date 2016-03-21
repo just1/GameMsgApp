@@ -74,7 +74,7 @@ public class ListFragment extends Fragment {
 
     private void loadData(){
 
-        BModLoader.getInstance().load(getActivity().getApplicationContext(), new FindListener<NewsSummary>() {
+        BModLoader.getInstance().loadPage(getActivity().getApplicationContext(),mList.size(), new FindListener<NewsSummary>() {
             @Override
             public void onSuccess(List<NewsSummary> list) {
                 if ((null != mListView)&&(null != list)) {
@@ -90,9 +90,6 @@ public class ListFragment extends Fragment {
 
             }
         });
-
-
-
     }
 
 
@@ -147,19 +144,21 @@ public class ListFragment extends Fragment {
             if (view == null || view.getTag() == null || !(view.getTag() instanceof ViewHolder)) {
                 view = mInflater.inflate(R.layout.item_list, null);
                 holder = new ViewHolder();
-                holder.textView = (TextView) view.findViewById(R.id.tv_title);
+                holder.titleTextView = (TextView) view.findViewById(R.id.title);
+
                 view.setTag(holder);
             } else {
                 holder = (ViewHolder) view.getTag();
             }
 
-            holder.textView.setText(mList.get(i).getTitle());
+            holder.titleTextView.setText(mList.get(i).getTitle());
 
             return view;
         }
 
         class ViewHolder{
-            TextView textView;
+            TextView authorTextView;
+            TextView titleTextView;
         }
     }
 }

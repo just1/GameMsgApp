@@ -36,10 +36,17 @@ public class BModLoader {
 
     public void load(Context context,FindListener<NewsSummary> listener) {
         BmobQuery<NewsSummary> query = new BmobQuery<NewsSummary>();
-//        //查询playerName叫“比目”的数据
-//        query.addWhereEqualTo("playerName", "比目");
         //返回50条数据，如果不加上这条语句，默认返回10条数据
         query.setLimit(10);
+        //执行查询方法
+        query.findObjects(context, listener);
+    }
+
+    public void loadPage(Context context,int curCount,FindListener<NewsSummary> listener) {
+        BmobQuery<NewsSummary> query = new BmobQuery<NewsSummary>();
+        //返回50条数据，如果不加上这条语句，默认返回10条数据
+        query.setLimit(10);
+        query.setSkip(curCount);
         //执行查询方法
         query.findObjects(context, listener);
     }
