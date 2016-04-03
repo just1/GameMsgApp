@@ -3,14 +3,10 @@ package com.yis.gamemsgapp.model.loader;
 import android.content.Context;
 import android.util.Log;
 
-import com.yis.gamemsgapp.bean.NewsSummary;
-import com.yis.gamemsgapp.bean.Person;
-
-import java.util.List;
+import com.yis.gamemsgapp.bean.NewsList;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -34,16 +30,16 @@ public class BModLoader {
     }
 
 
-    public void load(Context context,FindListener<NewsSummary> listener) {
-        BmobQuery<NewsSummary> query = new BmobQuery<NewsSummary>();
+    public void load(Context context,FindListener<NewsList> listener) {
+        BmobQuery<NewsList> query = new BmobQuery<NewsList>();
         //返回50条数据，如果不加上这条语句，默认返回10条数据
         query.setLimit(10);
         //执行查询方法
         query.findObjects(context, listener);
     }
 
-    public void loadPage(Context context,int curCount,FindListener<NewsSummary> listener) {
-        BmobQuery<NewsSummary> query = new BmobQuery<NewsSummary>();
+    public void loadPage(Context context,int curCount,FindListener<NewsList> listener) {
+        BmobQuery<NewsList> query = new BmobQuery<NewsList>();
         //返回50条数据，如果不加上这条语句，默认返回10条数据
         query.setLimit(10);
         query.setSkip(curCount);
@@ -51,7 +47,7 @@ public class BModLoader {
         query.findObjects(context, listener);
     }
 
-    public void add(Context context,NewsSummary bean){
+    public void add(Context context,NewsList bean){
         bean.save(context, new SaveListener() {
 
             @Override

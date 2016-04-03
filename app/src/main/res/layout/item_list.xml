@@ -8,34 +8,34 @@
         android:id="@+id/author_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="3dp">
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="12dp">
 
         <ImageView
             android:id="@+id/author_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_1"/>
+            android:src="@drawable/ic_1" />
 
         <TextView
             android:id="@+id/author_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/author_icon"
             android:layout_marginLeft="5dp"
-            android:textSize="10sp"
-            android:text="大熊"/>
+            android:layout_toRightOf="@id/author_icon"
+            android:text="大熊"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/publish_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/author_icon"
-            android:layout_marginLeft="5dp"
             android:layout_below="@id/author_name"
-            android:textSize="8sp"
-            android:text="2016-03-15"/>
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/author_icon"
+            android:text="2016-03-15"
+            android:textSize="8sp" />
     </RelativeLayout>
 
 
@@ -50,35 +50,56 @@
         android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:gravity="center_vertical"
-        android:text="德国总统北京簋街吃晚餐每桌2500元 部分菜品曝光"/>
+        android:text="德国总统北京簋街吃晚餐每桌2500元 部分菜品曝光"
+        android:textSize="12sp" />
 
     <LinearLayout
         android:id="@+id/layout_imgs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="12dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="12dp">
+        android:orientation="horizontal">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img1"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_2"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@drawable/ic_2" />
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img2"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_3"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@drawable/ic_3" />
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img3"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_4"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@drawable/ic_4" />
+
+        <!--<ImageView-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@drawable/ic_2" />-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@drawable/ic_3" />-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@drawable/ic_4" />-->
 
     </LinearLayout>
 

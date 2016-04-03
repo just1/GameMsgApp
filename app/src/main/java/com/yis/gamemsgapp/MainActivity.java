@@ -6,12 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.yis.gamemsgapp.bean.NewsSummary;
 import com.yis.gamemsgapp.fragment.ListFragment;
-import com.yis.gamemsgapp.model.loader.BModLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,17 +77,17 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mAdapter);
     }
 
-    private void testAddData(){
-        for(int i=1;i<200;i++) {
-            NewsSummary bean =new NewsSummary("标题"+i,
-                    "描述"+i,
-                    String.valueOf(i),
-                    "lh");
-
-            BModLoader.getInstance().add(this, bean);
-
-        }
-    }
+//    private void testAddData(){
+//        for(int i=1;i<200;i++) {
+//            NewsList bean =new NewsList("标题"+i,
+//                    "描述"+i,
+//                    String.valueOf(i),
+//                    "lh");
+//
+//            BModLoader.getInstance().add(this, bean);
+//
+//        }
+//    }
 
     class MyAdapter extends FragmentPagerAdapter {
 
